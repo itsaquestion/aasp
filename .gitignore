@@ -1,0 +1,35 @@
+# Python 编译文件
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# 虚拟环境
+venv/
+*.venv
+env/
+*.env
+
+# IDE 生成的目录和文件
+.idea/
+.vscode/
+*.iml
+*.ipynb_checkpoints
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# 上传和提交目录
+submissions/
+
+# Flask 会话和日志文件
+instance/
+*.log
+
+# 系统生成的文件
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.swp
+*.swo

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>AASP: Academic Assignment Submission Platform</title>
+</head>
+<body>
+<div class="container mt-5">
+    <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+          <div class="mb-3">
+            <label for="class_name" class="form-label">班级</label>
+            <select class="form-control" id="class_name" name="class_name" required>
+                {% for class_name in classes %}
+                <option value="{{ class_name }}">{{ class_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="student_id" class="form-label">学号</label>
+            <input type="text" class="form-control" id="student_id" name="student_id" required>
+        </div>
+        <div class="mb-3">
+            <label for="student_name" class="form-label">姓名</label>
+            <input type="text" class="form-control" id="student_name" name="student_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="file" class="form-label">上传作业</label>
+            <input type="file" class="form-control" id="file" name="file" required>
+        </div>
+        <button type="submit" class="btn btn-primary">提交</button>
+    </form>
+</div>
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+function validateForm() {
+    var student_id = document.getElementById('student_id').value;
+    var student_name = document.getElementById('student_name').value;
+
+    var idPattern = /^\d{13}$/;
+    var namePattern = /^[\u4e00-\u9fa5]+$/;
+
+    if (!idPattern.test(student_id)) {
+        alert("学号必须是13位数字");
+        return false;
+    }
+
+    if (!namePattern.test(student_name)) {
+        alert("姓名只能包含中文字符");
+        return false;
+    }
+
+    return true;
+}
+</script>
+</body>
+</html>
