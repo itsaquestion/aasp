@@ -21,6 +21,16 @@ def secure_filename_custom(filename):
     filename = re.sub(r'[^a-zA-Z0-9_\u4e00-\u9fa5]', '', filename)
     return filename
 
+
+# 允许的文件扩展名
+ALLOWED_EXTENSIONS = {'py', 'ipynb'}
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     file = request.files['file']
@@ -35,6 +45,9 @@ def upload_file():
     
     class_name = request.form['class_name']
     
+    if file and not allowed_file(file.filename):
+        return "Error: Only .py and .ipynb files are allowed", 400
+ 
     # 验证文件大小
     if file and len(file.read()) > 5 * 1024 * 1024:  # 5MB limit
         file.seek(0)  # Reset file read position to the beginning
