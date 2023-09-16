@@ -35,6 +35,13 @@ def upload_file():
     
     class_name = request.form['class_name']
     
+    # 验证文件大小
+    if file and len(file.read()) > 5 * 1024 * 1024:  # 5MB limit
+        file.seek(0)  # Reset file read position to the beginning
+        return "Error: File size exceeds 5MB limit", 400
+
+    file.seek(0)  # Reset file read position to the beginning
+     
     # 创建 'submissions/班级/<日期>' 文件夹
     date_str = datetime.now().strftime('%Y%m%d')
     submission_path = os.path.join('submissions', class_name, date_str)
