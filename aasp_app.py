@@ -3,7 +3,9 @@ from werkzeug.utils import secure_filename
 import os
 from datetime import datetime
 
+
 app = Flask(__name__)
+app.config['APPLICATION_ROOT'] = '/aasp'
 
 classes = ["金融1班", "金融2班", "电商师1班", "电商师2班"]
 
