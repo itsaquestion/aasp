@@ -1,2 +1,2 @@
 #!/usr/bin/bash
-python --daemongunicorn -w  wsgi:app
+python --daemon gunicorn -w  wsgi:app
